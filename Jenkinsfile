@@ -11,7 +11,7 @@ pipeline {
       label "go-demo-5-build"
       serviceAccount "build"
       yamlFile "KubernetesPod.yaml"
-    }      
+    }
   }
   environment {
     image = "tonygilkerson/go-demo-5"
@@ -30,6 +30,16 @@ pipeline {
         }
         container("docker") {
           k8sBuildImageBeta(image, false)
+        }
+      }
+    }
+    stage("aegdebug") {
+      steps {
+        container("golang") {
+          sh 'env > env.txt'
+          for (String i : readFile('env.txt').split("\r?\n")) {
+            println i
+          }
         }
       }
     }
