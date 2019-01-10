@@ -49,6 +49,7 @@ spec:
           value: {{ .Release.Namespace }}
         - name: KUBERNETES_MONGO_SERVICE_NAME
           value: {{ template "helm.fullname" . }}-db
+  # AEG hack - I cant get this to work on docker-for-windows
   # volumeClaimTemplates:
   # - metadata:
   #     name: {{ template "helm.fullname" . }}-db
