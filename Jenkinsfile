@@ -36,7 +36,10 @@ pipeline {
     stage("aegdebug") {
       steps {
         container("golang") {
-          sh 'env'
+          sh 'env > env.txt'
+          for (String i : readFile('env.txt').split("\r?\n")) {
+            println i
+          }
         }
       }
     }
