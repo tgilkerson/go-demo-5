@@ -17,7 +17,7 @@ pipeline {
     image = "tonygilkerson/go-demo-5"
     project = "go-demo-5"
     domain = "127.0.0.1.nip.io"
-    cmAddr = "cm.127.0.0.1.nip.io"
+    cmAddr = "cm-chartmuseum.charts:8080"
   }
   stages {
     stage("aegdebug") {
