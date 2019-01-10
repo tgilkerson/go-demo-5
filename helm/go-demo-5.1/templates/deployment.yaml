@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: "vfarcic/go-demo-5:{{ .Values.image.tag }}"
+        image: "tonygilkerson/go-demo-5:{{ .Values.image.tag }}"
         env:
         - name: DB
           value: {{ template "helm.fullname" . }}-db
@@ -72,7 +72,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: "vfarcic/go-demo-5:{{ .Values.image.tag }}"
+        image: "tonygilkerson/go-demo-5:{{ .Values.image.tag }}"
         env:
         - name: DB
           value: {{ template "helm.fullname" . }}-db
