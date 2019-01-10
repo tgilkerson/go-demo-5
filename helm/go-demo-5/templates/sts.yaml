@@ -37,9 +37,9 @@ spec:
           - containerPort: 27017
         resources:
 {{ toYaml .Values.dbResources | indent 10 }}
-        volumeMounts:
-        - name: {{ template "helm.fullname" . }}-db
-          mountPath: /data/db
+        # volumeMounts:
+        # - name: {{ template "helm.fullname" . }}-db
+        #   mountPath: /data/db
       - name: db-sidecar
         image: cvallance/mongo-k8s-sidecar
         env:
@@ -49,24 +49,24 @@ spec:
           value: {{ .Release.Namespace }}
         - name: KUBERNETES_MONGO_SERVICE_NAME
           value: {{ template "helm.fullname" . }}-db
-  volumeClaimTemplates:
-  - metadata:
-      name: {{ template "helm.fullname" . }}-db
-      labels:
-        app: {{ template "helm.name" . }}-db
-        chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-        release: {{ .Release.Name }}
-        heritage: {{ .Release.Service }}
-    spec:
-      accessModes:
-      - {{ .Values.dbPersistence.accessMode }}
-      resources:
-        requests:
-          storage: {{ .Values.dbPersistence.size }}
-      {{- if .Values.dbPersistence.storageClass }}
-      {{- if eq "-" .Values.dbPersistence.storageClass }}
-      storageClassName: ""
-      {{- else }}
-      storageClassName: "{{ .Values.dbPersistence.storageClass }}"
-      {{- end }}
-      {{- end }}
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: {{ template "helm.fullname" . }}-db
+  #     labels:
+  #       app: {{ template "helm.name" . }}-db
+  #       chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+  #       release: {{ .Release.Name }}
+  #       heritage: {{ .Release.Service }}
+  #   spec:
+  #     accessModes:
+  #     - {{ .Values.dbPersistence.accessMode }}
+  #     resources:
+  #       requests:
+  #         storage: {{ .Values.dbPersistence.size }}
+  #     {{- if .Values.dbPersistence.storageClass }}
+  #     {{- if eq "-" .Values.dbPersistence.storageClass }}
+  #     storageClassName: ""
+  #     {{- else }}
+  #     storageClassName: "{{ .Values.dbPersistence.storageClass }}"
+  #     {{- end }}
+  #     {{- end }}
