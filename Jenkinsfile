@@ -11,7 +11,7 @@ pipeline {
       label "go-demo-5-build"
       serviceAccount "build"
       yamlFile "KubernetesPod.yaml"
-    }      
+    }
   }
   environment {
     image = "tonygilkerson/go-demo-5"
@@ -20,6 +20,13 @@ pipeline {
     cmAddr = "cm.127.0.0.1.nip.io"
   }
   stages {
+    stage("aegdebug") {
+      steps {
+        container("golang") {
+          sh "env"
+        }
+      }
+    }
     stage("build") {
       steps {
         container("golang") {
